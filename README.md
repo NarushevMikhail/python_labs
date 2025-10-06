@@ -20,6 +20,46 @@
 <img width="1929" height="1494" alt="image" src="https://github.com/user-attachments/assets/e1bb232a-7191-45ca-9979-5dcf559e6428" />
 <div>Функция min_max возвращает минимальный и максимальный элемент из списка, если список пустой, то ValueError. Следущая функция unique_sorted, которая возвращает отсортированный список, в котором все элементы уникальны. В последней функции проверям сначала, что матрица не рванная, иначе вернется ValueError, затем тип эллементов в списки, если хотя бы один из них не int, то возвращаем TypeError. В рузультате работы данной программы переменные возвращаются одним списком.</div>
 
+def min_max(s):
+    if len(s) == 0:
+        return 'ValueError'
+    else:
+        return min(s), max(s)
+
+def unique_sorted(s):
+    return sorted(set(s))
+
+def flatten(s):
+    task3 = []
+    if len(s) == 0:
+        return 'ValueError'
+    else:
+        for x in s:
+            for i in x:
+                if type(i) != int:
+                    return 'TypeError'
+                else:
+                    task3.append(i)
+        return task3
+
+
+print('')
+print(min_max([3, -1, 5, 5, 0]))
+print(min_max([42, 42]))
+print(min_max([-5, -2, -9]))
+print(min_max([]))
+print(min_max([1.5, 2, 2.0, -3.1]))
+print('')
+print(unique_sorted([3, 1, 2, 1, 3]))
+print(unique_sorted([]))
+print(unique_sorted([-1, -1, 0, 2, 2]))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+print('')
+print(flatten([[1, 2], [3, 4]]))
+print(flatten([[1, 2], (3, 4, 5)]))
+print(flatten([[1], [], [2, 3]]))
+print(flatten([[1, 2], "ab"]))
+
 <h2>Задание B.</h2>
 <img width="1828" height="1462" alt="image" src="https://github.com/user-attachments/assets/08d54569-a18d-4485-9d8a-4f39db51a737" />
 
