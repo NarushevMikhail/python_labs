@@ -21,34 +21,87 @@
 
 <h2>Задание B.</h2>
 <img width="1828" height="1462" alt="image" src="https://github.com/user-attachments/assets/08d54569-a18d-4485-9d8a-4f39db51a737" />
+<h2>def min_max(s):
+    if len(s) == 0:
+        return 'ValueError'
+    else:
+        return min(s), max(s)
+
+def unique_sorted(s):
+    return sorted(set(s))
+
+def flatten(s):
+    task3 = []
+    if len(s) == 0:
+        return 'ValueError'
+    else:
+        for x in s:
+            for i in x:
+                if type(i) != int:
+                    return 'TypeError'
+                else:
+                    task3.append(i)
+        return task3
+
+
+print('')
+print(min_max([3, -1, 5, 5, 0]))
+print(min_max([42, 42]))
+print(min_max([-5, -2, -9]))
+print(min_max([]))
+print(min_max([1.5, 2, 2.0, -3.1]))
+print('')
+print(unique_sorted([3, 1, 2, 1, 3]))
+print(unique_sorted([]))
+print(unique_sorted([-1, -1, 0, 2, 2]))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+print('')
+print(flatten([[1, 2], [3, 4]]))
+print(flatten([[1, 2], (3, 4, 5)]))
+print(flatten([[1], [], [2, 3]]))
+print(flatten([[1, 2], "ab"]))</h2>
 
 <h2>Задание C.</h2>
 <img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/b77397e6-ed71-45d0-8069-54598270c5cc" />
-```def format_record(s):
-    if len(s) != 3:
+def min_max(s):
+    if len(s) == 0:
         return 'ValueError'
     else:
-        fuo = s[0].split()
-        group = s[1]
-        gpa = s[2]
-        if type(s[2]) != float:
-            return 'TypeError'
-        else:
-            if len(fuo) == 2:
-                return f'{fuo[0]} {fuo[1][0]}., гр. {group}, GPA {gpa:.2f}'
-            elif fuo[0] != fuo[0].title() and len(fuo) == 3:
-                return f'{fuo[0].title()} {fuo[1][0].title()}.{fuo[2][0].title()}., гр. {group}, GPA {gpa:.2f}'
-            elif fuo[0] != fuo[0].title() and len(fuo) == 2:
-                return f'{fuo[0].title()} {fuo[1][0].title()}., гр. {group}, GPA {gpa:.2f}'
-            else:
-                return f'{fuo[0]} {fuo[1][0]}.{fuo[2][0]}., гр. {group}, GPA {gpa:.2f}'
-    
+        return min(s), max(s)
 
-print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
-print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
-print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
-print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
+def unique_sorted(s):
+    return sorted(set(s))
 
+def flatten(s):
+    task3 = []
+    if len(s) == 0:
+        return 'ValueError'
+    else:
+        for x in s:
+            for i in x:
+                if type(i) != int:
+                    return 'TypeError'
+                else:
+                    task3.append(i)
+        return task3
+
+
+print('')
+print(min_max([3, -1, 5, 5, 0]))
+print(min_max([42, 42]))
+print(min_max([-5, -2, -9]))
+print(min_max([]))
+print(min_max([1.5, 2, 2.0, -3.1]))
+print('')
+print(unique_sorted([3, 1, 2, 1, 3]))
+print(unique_sorted([]))
+print(unique_sorted([-1, -1, 0, 2, 2]))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+print('')
+print(flatten([[1, 2], [3, 4]]))
+print(flatten([[1, 2], (3, 4, 5)]))
+print(flatten([[1], [], [2, 3]]))
+print(flatten([[1, 2], "ab"]))
 
 
 
