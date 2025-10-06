@@ -7,13 +7,11 @@ def transpose(s):
         else:
             return [list(x) for x in zip(*s)]
         
-
 def row_sums(s):
     if any(len(x) != len(s[0]) for x in s):
         return 'ValueError'
     else:
         return [sum(x) for x in s]
-
 
 def col_sums(s):
     if any(len(x) != len(s[0]) for x in s):
