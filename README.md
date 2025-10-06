@@ -24,7 +24,7 @@
 
 <h2>Задание C.</h2>
 <img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/b77397e6-ed71-45d0-8069-54598270c5cc" />
-<div>def format_record(s):
+```def format_record(s):
     if len(s) != 3:
         return 'ValueError'
     else:
@@ -47,7 +47,7 @@
 print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
 print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
 print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
-print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))</div>
+print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
 
 
 
