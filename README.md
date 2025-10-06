@@ -14,3 +14,17 @@
 <h2>Задание 5.</h2>
 <img width="1805" height="583" alt="image" src="https://github.com/user-attachments/assets/f5cf663f-a79e-4647-8e57-d348c08d026f" />
 
+
+<h1>Лабораторная работа №2</h1>
+<h2>Задане 1.</h2>
+<img width="1929" height="1494" alt="image" src="https://github.com/user-attachments/assets/e1bb232a-7191-45ca-9979-5dcf559e6428" />
+
+<h2>Задание B.</h2>
+<img width="1828" height="1462" alt="image" src="https://github.com/user-attachments/assets/08d54569-a18d-4485-9d8a-4f39db51a737" />
+
+<h2>Задание C.</h2>
+<img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/b77397e6-ed71-45d0-8069-54598270c5cc" />
+
+
+
+
