@@ -9,13 +9,13 @@ def format_record(s):
             return 'TypeError'
         else:
             if len(fuo) == 2:
-                return f'{fuo[0]} {fuo[1][0]}., гр. {group}, GPA {gpa:.2f}'
+                return f'"{fuo[0]} {fuo[1][0]}., гр. {group}, GPA {gpa:.2f}"'
             elif fuo[0] != fuo[0].title() and len(fuo) == 3:
-                return f'{fuo[0].title()} {fuo[1][0].title()}.{fuo[2][0].title()}., гр. {group}, GPA {gpa:.2f}'
+                return f'"{fuo[0].title()} {fuo[1][0].title()}.{fuo[2][0].title()}., гр. {group}, GPA {gpa:.2f}"'
             elif fuo[0] != fuo[0].title() and len(fuo) == 2:
-                return f'{fuo[0].title()} {fuo[1][0].title()}., гр. {group}, GPA {gpa:.2f}'
+                return f'"{fuo[0].title()} {fuo[1][0].title()}., гр. {group}, GPA {gpa:.2f}"'
             else:
-                return f'{fuo[0]} {fuo[1][0]}.{fuo[2][0]}., гр. {group}, GPA {gpa:.2f}'
+                return f'"{fuo[0]} {fuo[1][0]}.{fuo[2][0]}., гр. {group}, GPA {gpa:.2f}"'
     
 
 print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
