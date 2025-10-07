@@ -44,7 +44,7 @@ def flatten(s):
                 else:
                     task3.append(i)
         return task3
-
+```
 
 print('')
 print(min_max([3, -1, 5, 5, 0]))
@@ -68,7 +68,7 @@ print(flatten([[1, 2], "ab"]))
 <img width="2368" height="1551" alt="image" src="https://github.com/user-attachments/assets/92a4d08e-6f76-4c30-b509-cfa694fc5186" />
 <div>В 1 функции проверяем матрицу на рваность, потом создаём новый список списков, внитри которого содержаться элементы с одиннаковыми индексами из исходной последователбности. В 2 функции делаем проверку матрицы на рваность, а затем возвращаем списко суммы элементов. В 3 функции проеврям матрицу на рваность, затем возвращаем сумму элементов с одинаковыми индексами из исходной последовательности. </div>
 
-
+```
 def transpose(s):
     if len(s) == 0:
         return []
@@ -107,6 +107,7 @@ print(col_sums([[1, 2, 3], [4, 5, 6]]))
 print(col_sums([[-1, 1], [10, -10]]))
 print(col_sums([[0, 0], [0, 0]]))
 print(col_sums([[1, 2], [3]]))
+
 ```
 
 
@@ -114,6 +115,7 @@ print(col_sums([[1, 2], [3]]))
 <h2>Задание C.</h2>
 <img width="2183" height="1381" alt="image" src="https://github.com/user-attachments/assets/4b84eeb6-af0a-4189-be07-2495f9219717" />
 <div>dwfiejuifgejfrfuyer</div>
+
 ```
 def format_record(s):
     if len(s) != 3:
@@ -139,6 +141,7 @@ print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
 print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
 print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
 print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
+
 ```
 
 
