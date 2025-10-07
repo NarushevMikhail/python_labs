@@ -111,7 +111,7 @@ print(col_sums([[1, 2], [3]]))
 
 <h2>Задание C.</h2>
 <img width="2183" height="1381" alt="image" src="https://github.com/user-attachments/assets/4b84eeb6-af0a-4189-be07-2495f9219717" />
-<div>dwfiejuifgejfrfuyer</div>
+<div>Сначала проверяем длину кортежа s, она должна быть равной 3. Если GPA у нас не float, то возвращаем TypeError. Разбиваем ФИО через пробел, возвращаем через f строки фио группы и gpa</div>
 
 ```
 def format_record(s):
