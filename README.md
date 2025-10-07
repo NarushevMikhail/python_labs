@@ -66,11 +66,77 @@ print(flatten([[1, 2], "ab"]))
 
 <h2>Задание B.</h2>
 <img width="2368" height="1551" alt="image" src="https://github.com/user-attachments/assets/92a4d08e-6f76-4c30-b509-cfa694fc5186" />
+```
+def transpose(s):
+    if len(s) == 0:
+        return []
+    else:
+        if any(len(x) != len(s[0]) for x in s):
+            return 'ValueError'
+        else:
+            return [list(x) for x in zip(*s)]
+        
+def row_sums(s):
+    if any(len(x) != len(s[0]) for x in s):
+        return 'ValueError'
+    else:
+        return [sum(x) for x in s]
+
+def col_sums(s):
+    if any(len(x) != len(s[0]) for x in s):
+        return 'ValueError'
+    else:
+        return [sum(x) for x in zip(*s)]
+
+
+
+print(transpose([[1, 2, 3]]))
+print(transpose([[1], [2], [3]]))
+print(transpose([[1, 2], [3, 4]]))
+print(transpose([]))
+print(transpose([[1, 2], [3]]))
+print('')
+print(row_sums([[1, 2, 3], [4, 5, 6]]))
+print(row_sums([[-1, 1], [10, -10]]))
+print(row_sums([[0, 0], [0, 0]]))
+print(row_sums([[1, 2], [3]]))
+print('')
+print(col_sums([[1, 2, 3], [4, 5, 6]]))
+print(col_sums([[-1, 1], [10, -10]]))
+print(col_sums([[0, 0], [0, 0]]))
+print(col_sums([[1, 2], [3]]))
+```
 
 
 
 <h2>Задание C.</h2>
 <img width="2183" height="1381" alt="image" src="https://github.com/user-attachments/assets/4b84eeb6-af0a-4189-be07-2495f9219717" />
+```
+def format_record(s):
+    if len(s) != 3:
+        return 'ValueError'
+    else:
+        fuo = s[0].split()
+        group = s[1]
+        gpa = s[2]
+        if type(s[2]) != float:
+            return 'TypeError'
+        else:
+            if len(fuo) == 2:
+                return f'"{fuo[0]} {fuo[1][0]}.," гр. {group}, GPA {gpa:.2f}'
+            elif fuo[0] != fuo[0].title() and len(fuo) == 3:
+                return f'{fuo[0].title()} {fuo[1][0].title()}.{fuo[2][0].title()}., гр. {group}, GPA {gpa:.2f}'
+            elif fuo[0] != fuo[0].title() and len(fuo) == 2:
+                return f'{fuo[0].title()} {fuo[1][0].title()}., гр. {group}, GPA {gpa:.2f}'
+            else:
+                return f'{fuo[0]} {fuo[1][0]}.{fuo[2][0]}., гр. {group}, GPA {gpa:.2f}'
+    
+
+print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
+print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
+print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
+print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
+```
 
 
 
