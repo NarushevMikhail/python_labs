@@ -44,7 +44,6 @@ def flatten(s):
                 else:
                     task3.append(i)
         return task3
-```
 
 print('')
 print(min_max([3, -1, 5, 5, 0]))
@@ -62,6 +61,7 @@ print(flatten([[1, 2], [3, 4]]))
 print(flatten([[1, 2], (3, 4, 5)]))
 print(flatten([[1], [], [2, 3]]))
 print(flatten([[1, 2], "ab"]))
+```
 
 
 <h2>Задание B.</h2>
