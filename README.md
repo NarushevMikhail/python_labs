@@ -17,10 +17,13 @@
 
 <h1>Лабораторная работа №2</h1>
 <h2>Задане 1.</h2>
-<img width="1929" height="1494" alt="image" src="https://github.com/user-attachments/assets/e1bb232a-7191-45ca-9979-5dcf559e6428" />
+<img width="2331" height="1594" alt="image" src="https://github.com/user-attachments/assets/c4a0c045-612b-484f-8d35-8e6b3c2b76c6" />
+
+
 <div>Функция min_max возвращает минимальный и максимальный элемент из списка, если список пустой, то ValueError. Следущая функция unique_sorted, которая возвращает отсортированный список, в котором все элементы уникальны. В последней функции проверям сначала, что матрица не рванная, иначе вернется ValueError, затем тип эллементов в списки, если хотя бы один из них не int, то возвращаем TypeError. В рузультате работы данной программы переменные возвращаются одним списком.</div>
 
-```def min_max(s):
+```
+def min_max(s):
     if len(s) == 0:
         return 'ValueError'
     else:
@@ -62,11 +65,13 @@ print(flatten([[1, 2], "ab"]))
 ```
 
 <h2>Задание B.</h2>
-<img width="1828" height="1462" alt="image" src="https://github.com/user-attachments/assets/08d54569-a18d-4485-9d8a-4f39db51a737" />
+<img width="2368" height="1551" alt="image" src="https://github.com/user-attachments/assets/92a4d08e-6f76-4c30-b509-cfa694fc5186" />
+
 
 
 <h2>Задание C.</h2>
-<img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/b77397e6-ed71-45d0-8069-54598270c5cc" />
+<img width="2183" height="1381" alt="image" src="https://github.com/user-attachments/assets/4b84eeb6-af0a-4189-be07-2495f9219717" />
+
 
 
 
