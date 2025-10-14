@@ -1,6 +1,6 @@
 def format_record(s):
     if len(s) != 3:
-        return 'ValueError'
+        raise ValueError('Кортеж короче 3 элементов')
     else:
         fuo = s[0].split()
         group = s[1]
@@ -21,5 +21,7 @@ def format_record(s):
 print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
 print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
 print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
-print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
+print(format_record(("ABB-01", 3.999)))
 
+# if isinstance(1, int)
+# #1 объект который мы проверяем
