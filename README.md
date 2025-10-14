@@ -139,6 +139,47 @@ print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
 print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
 print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
 ```
+<h1>Лабораторная работа №3</h1>
+<h2>Задание text.py</h2>
+<img width="2079" height="1354" alt="image" src="https://github.com/user-attachments/assets/e7c012b6-c62d-4bec-b07f-eb650ce7c551" />
+
+```
+import re
+from collections import Counter
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if casefold:
+        text = text.casefold()
+    if yo2e:
+        translation_table = str.maketrans({
+            'ё': 'е',
+            'Ё': 'Е'
+        })
+        text = text.translate(translation_table)
+    translation_table_controls = str.maketrans({
+        '\t': ' ',
+        '\r': ' ',
+        '\n': ' ',
+        '\v': ' ',
+        '\f': ' ',
+    })
+    text = text.translate(translation_table_controls)
+    text = ' '.join(text.split())
+
+    return text
+
+def tokenize(text: str) -> list[str]:
+    pattern = r'\w+(?:-\w+)*'
+    tokens = re.findall(pattern, text)
+    return tokens
+
+def count_freq(tokens: list[str]) -> dict[str, int]:
+    freq = Counter(tokens)
+    return dict(freq)
+
+def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+    return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]
+```
+
 
 
 
