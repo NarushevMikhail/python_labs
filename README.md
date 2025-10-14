@@ -180,6 +180,47 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]
 ```
 
+<h2>Здание text_stats.py</h2>
+<img width="2063" height="1272" alt="image" src="https://github.com/user-attachments/assets/ca22a8af-7f15-4ef0-b68f-8b7554001232" />
+
+```
+import sys
+sys.path.append(r'c:/Users/narus/OneDrive/Рабочий стол/лабароторные работы/Программирование/репозиторий/python_labs/python_labs-1/src/lib/')
+
+from text import normalize, tokenize, count_freq
+
+def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
+    if not arr:
+        return "(нет данных)"
+    s = str()
+    if isTable:
+        word_col_width = max(len("слово"), max(len(a[0]) for a in arr))
+        freq_col_width = max(len("частота"), max(len(str(a[1])) for a in arr))
+        s += f"{'слово'.ljust(word_col_width)} | {'частота'.rjust(freq_col_width)}"
+        s += "\n" + "-" * word_col_width + "-+-" + "-" * freq_col_width
+        for word, freq in arr:
+            s += f"\n{word.ljust(word_col_width)} | {str(freq).rjust(freq_col_width)}"
+        return s
+    else:
+        return "\n".join(f"{a[0]}: {a[1]}" for a in arr)
+def main(text: str):
+    text = text.strip()
+    tokens = normalize(text)
+    tokens = tokenize(tokens)
+    freqs = count_freq(tokens)
+    total_words = len(tokens)
+    unique_words = len(freqs)
+    print(f"Всего слов: {total_words}")
+    print(f"Уникальных слов: {unique_words}")
+    top5 = sorted(freqs.items(), key=lambda x: x[1], reverse=True)[:5]
+    print("Топ-5:")
+    print(table(top5, True))
+
+main(sys.stdin.buffer.read().decode())
+```
+
+
+
 
 
 
