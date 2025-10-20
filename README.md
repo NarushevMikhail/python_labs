@@ -146,7 +146,6 @@ print(format_record(("  сидорова  анна   сергеевна ", "ABB-
 <h3>count_freq</h3><div>Использует Counter из collection, и чтобы вернул обычный словарь нужно использовать dict()</div>
 <h3>top_n</h3><div>Сортирует слова по убываию частот, а при равенстве пол алфавиту</div>
 <img width="2079" height="1354" alt="image" src="https://github.com/user-attachments/assets/e7c012b6-c62d-4bec-b07f-eb650ce7c551" />
-<h3>Вывод.</h3>
 <img width="2138" height="657" alt="image" src="https://github.com/user-attachments/assets/ac461e27-9c18-4db5-ae52-0beb15e72c90" />
 
 ```
