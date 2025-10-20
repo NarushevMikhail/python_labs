@@ -1,4 +1,5 @@
-from text import normalize, tokenize, count_freq, top_n
+from lab_03.text import normalize, tokenize, count_freq, top_n
+
 
 print("normalize:")
 print(normalize("ПрИвЕт\nМИр\t"))
@@ -17,6 +18,6 @@ print("count_freq:")
 print(count_freq(["a","b","a","c","b","a"]))
 print(count_freq(["bb","aa","bb","aa","cc"]))
 freq = count_freq(["a","b","a","c","b","a"])
-print(top_n(freq,2))
+print(top_n(freq, 2))
 freq_1 = count_freq(["bb","aa","bb","aa","cc"])
 print(top_n(freq_1, 2))

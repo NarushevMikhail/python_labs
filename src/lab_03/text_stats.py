@@ -1,24 +1,15 @@
 import sys
 sys.path.append(r'c:/Users/narus/OneDrive/Рабочий стол/лабароторные работы/Программирование/репозиторий/python_labs/python_labs-1/src/lib/')
 
-from text import normalize, tokenize, count_freq
+from lab_03.text import normalize, tokenize, count_freq
 
-def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
-    if not arr:
+def table(arr: list[tuple[str, int]], isTable: bool = True) -> str: #список кортежей, где каждый кортеж содержит в себе str, int
+    if not arr: #если arr пустой
         return "(нет данных)"
     s = str()
-    if isTable:
-        word_col_width = max(len("слово"), max(len(a[0]) for a in arr))
-        freq_col_width = max(len("частота"), max(len(str(a[1])) for a in arr))
-        s += f"{'слово'.ljust(word_col_width)} | {'частота'.rjust(freq_col_width)}"
-        s += "\n" + "-" * word_col_width + "-+-" + "-" * freq_col_width
-        for word, freq in arr:
-            s += f"\n{word.ljust(word_col_width)} | {str(freq).rjust(freq_col_width)}"
-        return s
-    else:
-        return "\n".join(f"{a[0]}: {a[1]}" for a in arr)
+    
 def main(text: str):
-    text = text.strip()
+    text = text.strip() #лишние пробелы в начале и конце
     tokens = normalize(text)
     tokens = tokenize(tokens)
     freqs = count_freq(tokens)
@@ -26,8 +17,10 @@ def main(text: str):
     unique_words = len(freqs)
     print(f"Всего слов: {total_words}")
     print(f"Уникальных слов: {unique_words}")
-    top5 = sorted(freqs.items(), key=lambda x: x[1], reverse=True)[:5]
+    top5 = sorted(freqs.items(), key=lambda x: x[0])
+    top_result = sorted(top5, key=lambda x: x[1], reverse=True)
     print("Топ-5:")
-    print(table(top5, True))
+    for i in top_result:
+        print(f'{i[0]}: {i[1]}')
 
-main(sys.stdin.buffer.read().decode())
+main(sys.stdin.buffer.read().decode('utf-8'))
