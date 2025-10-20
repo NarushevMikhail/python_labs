@@ -139,6 +139,102 @@ print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
 print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
 print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
 ```
+<h1>Лабораторная работа №3</h1>
+<h2>Задание text.py</h2>
+<h3>Normalize</h3><div> Данная функция, для начала она приводит текст к нижнему регистру, затем заменяет все буквы 'ё' на 'е', только потом заменяет все управляющие символы (табуляции, переносы строк) на проблеы. После этого удаляем все лишние пробелы через split, оставляя только одинарные между словами.</div>
+<h3>tokensize</h3><div>Используеn регулярные выражения, благодаря которым будет находится слова с дефисом. Возвращает список токенов.</div>
+<h3>count_freq</h3><div>Использует Counter из collection, и чтобы вернул обычный словарь нужно использовать dict()</div>
+<h3>top_n</h3><div>Сортирует слова по убываию частот, а при равенстве пол алфавиту</div>
+<img width="2079" height="1354" alt="image" src="https://github.com/user-attachments/assets/e7c012b6-c62d-4bec-b07f-eb650ce7c551" />
+<img width="2138" height="657" alt="image" src="https://github.com/user-attachments/assets/ac461e27-9c18-4db5-ae52-0beb15e72c90" />
+
+```
+import re
+from collections import Counter
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if casefold:
+        text = text.casefold()
+    if yo2e:
+        translation_table = str.maketrans({
+            'ё': 'е',
+            'Ё': 'Е'
+        })
+        text = text.translate(translation_table)
+    translation_table_controls = str.maketrans({
+        '\t': ' ',
+        '\r': ' ',
+        '\n': ' ',
+        '\v': ' ',
+        '\f': ' ',
+    })
+    text = text.translate(translation_table_controls)
+    text = ' '.join(text.split())
+
+    return text
+
+def tokenize(text: str) -> list[str]:
+    pattern = r'\w+(?:-\w+)*'
+    tokens = re.findall(pattern, text)
+    return tokens
+
+def count_freq(tokens: list[str]) -> dict[str, int]:
+    freq = Counter(tokens)
+    return dict(freq)
+
+def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+    return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]
+```
+
+<h2>Здание text_stats.py</h2>
+
+<div>
+    Импортируем sys, через который указываем путь до файла, затем из файла text Ипортируем функции, Объявляем основную функцию программы (main), которая принимает строку text для анализа. Потом в top5 сортируем слова по алфавиту, а затем в top_result по убыванию.
+</div>
+
+<img width="2063" height="1272" alt="image" src="https://github.com/user-attachments/assets/ca22a8af-7f15-4ef0-b68f-8b7554001232" />
+<img width="2397" height="269" alt="image" src="https://github.com/user-attachments/assets/f637973e-5260-4da9-a97f-fea30d43440f" />
+
+
+```
+import sys
+sys.path.append(r'c:/Users/narus/OneDrive/Рабочий стол/лабароторные работы/Программирование/репозиторий/python_labs/python_labs-1/src/lib/')
+
+from text import normalize, tokenize, count_freq
+
+def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
+    if not arr:
+        return "(нет данных)"
+    s = str()
+    if isTable:
+        word_col_width = max(len("слово"), max(len(a[0]) for a in arr))
+        freq_col_width = max(len("частота"), max(len(str(a[1])) for a in arr))
+        s += f"{'слово'.ljust(word_col_width)} | {'частота'.rjust(freq_col_width)}"
+        s += "\n" + "-" * word_col_width + "-+-" + "-" * freq_col_width
+        for word, freq in arr:
+            s += f"\n{word.ljust(word_col_width)} | {str(freq).rjust(freq_col_width)}"
+        return s
+    else:
+        return "\n".join(f"{a[0]}: {a[1]}" for a in arr)
+def main(text: str):
+    text = text.strip()
+    tokens = normalize(text)
+    tokens = tokenize(tokens)
+    freqs = count_freq(tokens)
+    total_words = len(tokens)
+    unique_words = len(freqs)
+    print(f"Всего слов: {total_words}")
+    print(f"Уникальных слов: {unique_words}")
+    top5 = sorted(freqs.items(), key=lambda x: x[1], reverse=True)[:5]
+    print("Топ-5:")
+    print(table(top5, True))
+
+main(sys.stdin.buffer.read().decode())
+```
+
+<h1>Лаборатрная работа №4</h1>
+
+
+
 
 
 
