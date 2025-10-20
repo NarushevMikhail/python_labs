@@ -231,6 +231,8 @@ def main(text: str):
 main(sys.stdin.buffer.read().decode())
 ```
 
+<h1>Лаборатрная работа №4</h1>
+
 
 
 
