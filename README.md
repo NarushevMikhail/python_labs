@@ -186,7 +186,10 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 ```
 
 <h2>Здание text_stats.py</h2>
+
 <img width="2063" height="1272" alt="image" src="https://github.com/user-attachments/assets/ca22a8af-7f15-4ef0-b68f-8b7554001232" />
+<img width="2397" height="269" alt="image" src="https://github.com/user-attachments/assets/f637973e-5260-4da9-a97f-fea30d43440f" />
+
 
 ```
 import sys
