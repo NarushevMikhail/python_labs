@@ -236,11 +236,14 @@ main(sys.stdin.buffer.read().decode())
 ### Пункт 1.
 <img width="1590" height="664" alt="image" src="https://github.com/user-attachments/assets/d999179f-1c59-4c63-bf5e-f3cfe4b0b97a" />
 
-### Пункт 2.
+### Пункт 2 + задание под звездочкой.
 <img width="2047" height="1220" alt="image" src="https://github.com/user-attachments/assets/f7448d2f-00ac-4b0d-8acc-341f3f97020f" />
 
-
+### Вывод
 <img width="2138" height="773" alt="image" src="https://github.com/user-attachments/assets/c646df54-9d7e-4623-aa8c-8a5c13775764" />
+
+### Папка с check.csv
+<img width="852" height="306" alt="image" src="https://github.com/user-attachments/assets/5ed6f796-17c1-4480-8e87-8b4daef2f020" />
 
 
 
