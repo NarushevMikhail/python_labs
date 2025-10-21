@@ -22,11 +22,11 @@ def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...
     with p.open("w", newline="", encoding="utf-8") as f: #w - открыть файл для записи, mewline - настройка для работы с csv файлами
         w = csv.writer(f)
         if header is not None:
-            w.writerow(header)
+            w.writerow(header) #записывет заголовок
         else:
             header = ['Слово', 'Частота'] #header - заголовок таблицы
             w.writerow(header)
-        for r in rows:
+        for r in rows: #rows - список, кортеж, строки с какой - то последовательностью
             if len(r) == 2:
                 w.writerow(r)
             else:
