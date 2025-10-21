@@ -233,8 +233,15 @@ main(sys.stdin.buffer.read().decode())
 
 # Лаборатрная работа №4 
 ## Задние A (text_io_py)
+### Пункт 1.
+<img width="1590" height="664" alt="image" src="https://github.com/user-attachments/assets/d999179f-1c59-4c63-bf5e-f3cfe4b0b97a" />
 
-<img width="1512" height="531" alt="image" src="https://github.com/user-attachments/assets/47322cef-8ec8-4fef-8952-ff6717e3f2d6" />
+### Пункт 2.
+<img width="2047" height="1220" alt="image" src="https://github.com/user-attachments/assets/f7448d2f-00ac-4b0d-8acc-341f3f97020f" />
+
+
+<img width="2138" height="773" alt="image" src="https://github.com/user-attachments/assets/c646df54-9d7e-4623-aa8c-8a5c13775764" />
+
 
 
 
