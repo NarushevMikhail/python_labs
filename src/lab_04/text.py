@@ -30,5 +30,11 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
     freq = Counter(tokens) #специальный объект Counter
     return dict(freq) #преобразование в обычный словарь
 
-def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+def top_n(tokens, n=10):
+    if isinstance(tokens, dict):
+        freq = tokens
+    else:
+        freq = {}
+        for token in tokens:
+            freq[token] = freq.get(token, 0) + 1
     return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]

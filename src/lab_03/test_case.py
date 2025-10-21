@@ -1,4 +1,4 @@
-from lab_03.text import normalize, tokenize, count_freq, top_n
+from text import normalize, tokenize, count_freq, top_n
 
 
 print("normalize:")
