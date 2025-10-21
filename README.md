@@ -231,7 +231,11 @@ def main(text: str):
 main(sys.stdin.buffer.read().decode())
 ```
 
-<h1>Лаборатрная работа №4</h1>
+# Лаборатрная работа №4 
+## Задние A (text_io_py)
+
+<img width="1512" height="531" alt="image" src="https://github.com/user-attachments/assets/47322cef-8ec8-4fef-8952-ff6717e3f2d6" />
+
 
 
 
