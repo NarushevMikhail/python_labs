@@ -141,13 +141,13 @@ print(format_record(("  сидорова  анна   сергеевна ", "ABB-
 ```
 # Лабораторная работа №3
 ## Задание text.py
-### Normalize
+### `Normalize`
 #### Данная функция, для начала она приводит текст к нижнему регистру, затем заменяет все буквы 'ё' на 'е', только потом заменяет все управляющие символы (табуляции, переносы строк) на проблеы. После этого удаляем все лишние пробелы через split, оставляя только одинарные между словами.
-### tokensize
+### `tokensize`
 #### Используеn регулярные выражения, благодаря которым будет находится слова с дефисом. Возвращает список токенов.
-### count_freq
+### `count_freq`
 #### Использует Counter из collection, и чтобы вернул обычный словарь нужно использовать dict()
-### top_n
+### `top_n`
 #### Сортирует слова по убываию частот, а при равенстве пол алфавиту
 <img width="2079" height="1354" alt="image" src="https://github.com/user-attachments/assets/e7c012b6-c62d-4bec-b07f-eb650ce7c551" />
 <img width="2138" height="657" alt="image" src="https://github.com/user-attachments/assets/ac461e27-9c18-4db5-ae52-0beb15e72c90" />
@@ -189,11 +189,10 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]
 ```
 
-<h2>Здание text_stats.py</h2>
+## Здание text_stats.py
 
-<div>
-    Импортируем sys, через который указываем путь до файла, затем из файла text Ипортируем функции, Объявляем основную функцию программы (main), которая принимает строку text для анализа. Потом в top5 сортируем слова по алфавиту, а затем в top_result по убыванию.
-</div>
+#### Импортируем sys, через который указываем путь до файла, затем из файла text Ипортируем функции, Объявляем основную функцию программы (main), которая принимает строку text для анализа. Потом в top5 сортируем слова по алфавиту, а затем в top_result по убыванию.
+
 
 <img width="2063" height="1272" alt="image" src="https://github.com/user-attachments/assets/ca22a8af-7f15-4ef0-b68f-8b7554001232" />
 <img width="2397" height="269" alt="image" src="https://github.com/user-attachments/assets/f637973e-5260-4da9-a97f-fea30d43440f" />
@@ -238,9 +237,11 @@ main(sys.stdin.buffer.read().decode())
 # Лаборатрная работа №4 
 ## Задние A (text_io_py)
 ### Пункт 1.
+#### функция `read text` - открывает файл на чтение в указанной кодировке и вовзращает содержимое, как одну строку. Если файл не найден поднимать FileNotFoundError, если кодировка не подходит, то поднимать UnicodeDecodeError. `Path` - путь к файлу, encoding - кодировка файла (по умолчанию utf-8). `p = Path(path)` - преобразует входной путь в стандартный для работы объект. Затем, try - чтение  файла, обрабатываем отсальные ошибки. 
 <img width="1590" height="664" alt="image" src="https://github.com/user-attachments/assets/d999179f-1c59-4c63-bf5e-f3cfe4b0b97a" />
 
 ### Пункт 2 + задание под звездочкой.
+#### `write_csv` - создать или перезаписать CSV с разделителем, если передан header записать его первой строкой, проверяем что каждая строка в rows имеет одиннаковую длину. `with p.open('w', newline="", encordeing='utf-8')` W - открываем файл для записи, newline - спец настройка для корректной работы с CSV. `w = csv.writter(f)` - создание объекта, который умеет записывать данные в CSV формате. Для каждой строки проверяем что на равна 2, если не так, то вызываем ошибку ValueError. `Parent_directory = os.path.dirname(path)` - получение родительской директории, возвращает путь к папке, где лежит файл. `os.makedirs` - создает все папки в пути, `exist_ok=True` - если папка уже существует, не вызывает ошибку. `if __name__=='__main__'` - код выполниться только если файл запущен на прямую.
 <img width="2047" height="1220" alt="image" src="https://github.com/user-attachments/assets/f7448d2f-00ac-4b0d-8acc-341f3f97020f" />
 
 ### Вывод
@@ -248,6 +249,86 @@ main(sys.stdin.buffer.read().decode())
 
 ### Папка с check.csv
 <img width="852" height="306" alt="image" src="https://github.com/user-attachments/assets/5ed6f796-17c1-4480-8e87-8b4daef2f020" />
+
+```
+import csv #модуль для работы с csv файлами
+import os #модуль для работы с операционной системой 
+from pathlib import Path
+from typing import Iterable, Sequence
+
+def read_text(path: str | Path, encoding: str = "utf-8") -> str:
+    p = Path(path)
+    try:
+        content = p.read_text(encoding=encoding)
+        return content
+    except FileNotFoundError:
+        print(f'Ошибка: файл {p} не найден')
+        return None
+    except UnicodeDecodeError:
+        print(f'Ошибка: Неверная кодировка. Должна быть {encoding}')
+        return None
+    
+    
+def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+    p = Path(path) #path - куда сохранить файл
+    rows = list(rows) #итерируемый объект, содержащий последовательности
+    with p.open("w", newline="", encoding="utf-8") as f: #w - открыть файл для записи, mewline - настройка для работы с csv файлами
+        w = csv.writer(f)
+        if header is not None:
+            w.writerow(header)
+        else:
+            header = ['Слово', 'Частота'] #header - заголовок таблицы
+            w.writerow(header)
+        for r in rows:
+            if len(r) == 2:
+                w.writerow(r)
+            else:
+                raise ValueError('Разная длина строк.')
+
+from collections import Counter
+
+def frequencies_from_text(text: str) -> dict[str, int]:
+    from lab_04.text import normalize, tokenize  # из ЛР3
+    tokens = tokenize(normalize(text))
+    return Counter(tokens)  
+
+def sorted_word_counts(freq: dict[str, int]) -> list[tuple[str, int]]:
+    return sorted(freq.items(), key=lambda x: (-x[1], x[0]))
+
+def ensure_parent_dir(path: str | Path) -> None: # принимает путь, ничего не возвращает
+    parent_directory = os.path.dirname(path)
+    # получение родительской директории: os.path.dirname() возвращает путь к папке где лежит файл
+    os.makedirs(parent_directory, exist_ok=True) # os.makedirs() - создает все папки в пути
+    #exist_ok==True - если папки уже существуют, не вызывает ошибку
+
+def test():
+    print('пустой файл:', read_text(r"C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs\python_labs-1\src\data\empty.txt"))
+    print(read_text(r"C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs\python_labs-1\src\data\emery.txt"))
+    print(read_text(r"C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs\python_labs-1\src\data\input.txt"))
+    write_csv([("word","count"),("test",3)], r"C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs\python_labs-1\src\data\check.csv") 
+    write_csv(rows=[], path=r"C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs\python_labs-1\src\data\check_empty.csv", header=None) 
+
+if __name__ == "__main__": #если файл(name) запущен напрямую ("__main__")
+    test()
+
+```
+
+
+## Здание B
+
+
+
+### текст
+#### импортируем модуль sys, который предоставляет доступ ко все файлам и объектам. Импортируем все функции из лабы 3, для обраотки и анализа текста. Затем читаем текст и выводим статистику в консоль.
+<img width="1143" height="453" alt="image" src="https://github.com/user-attachments/assets/e492f17f-eee6-4c2e-8283-697ff1119fed" />
+
+### вывод в терминале
+<img width="1961" height="542" alt="image" src="https://github.com/user-attachments/assets/1a94b0e2-5026-4b74-9c3a-5e008b8462e8" />
+
+### файл check_sv2
+<img width="1069" height="883" alt="image" src="https://github.com/user-attachments/assets/5779daa1-3256-4020-a7c2-090913d03039" />
+
+
 
 
 
