@@ -31,9 +31,9 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     for item in data:
         all_keys.update(item.keys()) #добавляетт все элементы во множество
 
-    if data:  #Создается универсальный CSV файл, который может содержать все возможные поля из JSON данных
+    if data:  #проврека данных
         first_item_keys = list(data[0].keys())
-        remaining_keys = sorted(all_keys - set(first_item_keys))
+        remaining_keys = sorted(all_keys - set(first_item_keys)) #находит ключи которых нет в 1 элементе
         fieldnames = first_item_keys + remaining_keys
     else:
         fieldnames = sorted(all_keys)
