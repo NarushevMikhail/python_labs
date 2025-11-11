@@ -40,11 +40,11 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     
     try: # Запись в CSV
         with csv_file.open('w', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
+            writer = csv.DictWriter(f, fieldnames=fieldnames) #класс для записи CSV из словарей, список названий столбцов в правильном порядке
+            writer.writeheader() #Записывает первую строку CSV с названиями столбцов
             for row in data:
-                complete_row = {key: row.get(key, '') for key in fieldnames}
-                writer.writerow(complete_row)
+                complete_row = {key: row.get(key, '') for key in fieldnames} # значение по ключу из текущей строки
+                writer.writerow(complete_row) #Записывает одну строку в CSV файл
     except Exception as e:
         raise ValueError(f"Ошибка записи CSV: {e}")
 
