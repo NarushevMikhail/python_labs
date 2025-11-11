@@ -355,6 +355,169 @@ write_csv(top_n(tokenize(normalize(input_text)), 20), path=r'C:\Users\narus\OneD
 # write_csv(...) - записываем в CSV файл с заголовком ['WORD', 'COUNT'] и сохраняет файл
 
 ```
+# Лабораторная работа №5
+
+## Задание A — JSON ↔ CSV
+
+### Преобразует JSON-файл в CSV. Поддерживает список словарей [{...}, {...}], заполняет отсутствующие поля пустыми строками.Кодировка UTF-8. Порядок колонок — как в первом объекте или алфавитный. 
+
+### `Функция json_to_csv(json_path, csv_path).`
+
+Проверяет что исходный JSON файл существует
+Убеждается что файл имеет правильное расширение (.json), читает JSON данные, проверяет что они - это список словарей, собирает все возможные ключи, создает CSV файл с заголовками и заполняет данными. Если в ходе работы возникают ошибки, то выводит их в теминал.
+
+### `Функция csv_to_json(csv_path, json_path).`
+
+Проверяет что исходный CSV файл существует
+Убеждается, что файл имеет правильное расширение (.csv), затем считывает его используя первую строку как заголовки, преобразует строки в список словарей, сохраняет данные в JSON файл с красивым форматированием. Если есть ошибки, то выводит их в теринал.
+
+
+### Примеры работы: 
+
+### json -> csv:
+<img width="681" height="197" alt="image" src="https://github.com/user-attachments/assets/f67f83ad-c4ca-40bd-bc87-589f415fdd0a" />
+<img width="572" height="258" alt="image" src="https://github.com/user-attachments/assets/07e9eb64-a04f-4414-a49c-4512ce9662a9" />
+
+### csv -> json
+<img width="450" height="176" alt="image" src="https://github.com/user-attachments/assets/d361c70b-ad85-426d-8b89-29de5ca06dd6" />
+<img width="874" height="580" alt="image" src="https://github.com/user-attachments/assets/677c5075-f7ab-4969-93ce-59660714ac1a" />
+
+
+<img width="1845" height="1498" alt="image" src="https://github.com/user-attachments/assets/40876dce-879e-4873-a52f-e4a3532208db" />
+<img width="1823" height="1440" alt="image" src="https://github.com/user-attachments/assets/26e60399-a519-486c-b454-f436fe2bb8e0" />
+<img width="1225" height="202" alt="image" src="https://github.com/user-attachments/assets/6dcdcb15-3993-4cc2-88fb-ae621f6cce77" />
+
+
+### Отработка ошибок:
+
+#### Чтение файла json
+<img width="1740" height="204" alt="image" src="https://github.com/user-attachments/assets/789c10f9-77fa-4cf6-bb08-1a9eb0918b9a" />
+
+#### Чтение файла csv:
+<img width="1622" height="195" alt="image" src="https://github.com/user-attachments/assets/e433a3e6-2f1a-4d73-8c8d-e27b87b99081" />
+
+#### Файл не найден:
+<img width="1476" height="177" alt="image" src="https://github.com/user-attachments/assets/6d45792b-f59a-4b24-ac03-0def3a011c4d" />
+
+```
+import json, csv
+from pathlib import Path
+
+def json_to_csv(json_path: str, csv_path: str) -> None:
+    json_file = Path(json_path)
+    csv_file = Path(csv_path)
+
+    if not json_file.exists(): #exists - проверяет существует ли файл/директрия 
+        raise FileNotFoundError(f'Файл {json_path} не найден')
+    
+    if json_file.suffix.lower() != '.json': #suffix - возвращает расширение файла
+        raise ValueError('Неверный тип файла. Нужен .json')
+    
+    try:
+        with json_file.open('r', encoding = 'utf-8') as f:
+            data = json.load(f)
+
+    except json.JSONDecodeError as e:
+        raise ValueError(f'Ошибка чтения JSON: {e}')
+    
+    if not data:
+        raise ValueError("Пустой JSON или неподдерживаемая структура")
+    
+    if not isinstance(data, list):
+        raise ValueError("JSON должен содержать список объектов")
+    
+    if not all(isinstance(item, dict) for item in data):
+        raise ValueError("Все элементы JSON должны быть словарями")
+    
+    all_keys = set()
+    for item in data:
+        all_keys.update(item.keys())
+
+    if data:
+        first_item_keys = list(data[0].keys())
+        remaining_keys = sorted(all_keys - set(first_item_keys))
+        fieldnames = first_item_keys + remaining_keys
+    else:
+        fieldnames = sorted(all_keys)
+    
+    try: # Запись в CSV
+        with csv_file.open('w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            for row in data:
+                complete_row = {key: row.get(key, '') for key in fieldnames}
+                writer.writerow(complete_row)
+    except Exception as e:
+        raise ValueError(f"Ошибка записи CSV: {e}")
+
+def csv_to_json(csv_path: str, json_path: str) -> None:
+  
+    csv_file = Path(csv_path)
+    json_file = Path(json_path)
+    
+    if not csv_file.exists():
+        raise FileNotFoundError(f"Файл {csv_path} не найден")
+
+    if csv_file.suffix.lower() != '.csv':
+        raise ValueError("Неверный тип файла. Ожидается .csv")
+    
+    try:
+        with csv_file.open('r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is None:
+                raise ValueError("CSV файл не содержит заголовка")
+            
+            data = list(reader)
+            
+    except Exception as e:
+        raise ValueError(f"Ошибка чтения CSV: {e}")
+
+    if not data:
+        raise ValueError("Пустой CSV файл")
+
+    try:
+        with json_file.open('w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        raise ValueError(f"Ошибка записи JSON: {e}")
+
+json_to_csv("data/samples/people.json", "data/out/people_from_json.csv")
+csv_to_json("data/samples/people.csv", "data/out/people_from_csv.json")
+
+# from pathlib import Path
+
+# ss = Path('src/test.py')
+# print(type(ss).__name__)
+```
+
+
+
+
+
+
+## Задание B — CSV → XLSX
+
+### Функция `csv_to_xlsx(csv_path, xlsx_path)`.
+Проверяет существование CSV файла, убеждается что файл имеет правильное расширение (.csv), считывает все строки CSV в список, проверяет что файл не пустой, создает новую рабочую книгу (Workbook). Затем получает активный лист и задает ему название "Sheet1"Записывает все строки из CSV в Excel, сохраняет файл в формате XLSX
+
+### файл CSV -> XLSX:
+<img width="507" height="219" alt="image" src="https://github.com/user-attachments/assets/e59b8439-a772-4b76-a8dd-fb0624bcb1d3" />
+<img width="558" height="194" alt="image" src="https://github.com/user-attachments/assets/f15f9391-4ebd-44db-94e6-41956048189a" />
+
+### Отработака ошибок:
+
+#### пустой файл
+<img width="1089" height="244" alt="image" src="https://github.com/user-attachments/assets/a9b3be1b-774a-4bf3-894f-c6e68dbf8e7c" />
+
+#### файл не найден
+<img width="1426" height="219" alt="image" src="https://github.com/user-attachments/assets/1e396769-2493-4ad9-bf66-b320be659670" />
+
+
+
+
+<img width="1773" height="1449" alt="image" src="https://github.com/user-attachments/assets/0805242c-fe86-4c8f-891c-f7ae1ff3ad8b" />
+<img width="1344" height="827" alt="image" src="https://github.com/user-attachments/assets/df5aaabb-6c52-48a6-b775-c07affbaabe0" />
+
 
 
 
