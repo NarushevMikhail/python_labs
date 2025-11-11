@@ -29,8 +29,7 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
     if not rows[0]:
         raise ValueError("CSV файл не содержит заголовка")
     
-    # Создание XLSX
-    try:
+    try: # Создание XLSX
         wb = Workbook()
         ws = wb.active
         ws.title = "Sheet1"
