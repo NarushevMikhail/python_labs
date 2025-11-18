@@ -549,7 +549,8 @@ csv_to_json("data/samples/people.csv", "data/out/people_from_csv.json")
 ### CSV -> XLSX
 <img width="1280" height="90" alt="image" src="https://github.com/user-attachments/assets/da479fb4-dc31-4c19-8fa3-480ac9786bf4" />
 <img width="1181" height="490" alt="image" src="https://github.com/user-attachments/assets/55e34c50-6799-4e27-a397-ff7f4479c3ed" />
-right here upload img with xlsx
+<img width="2042" height="633" alt="image" src="https://github.com/user-attachments/assets/e4d71534-2e32-4359-9650-96c9793da39d" />
+
 
 ### Отработка help
 <img width="1280" height="654" alt="image" src="https://github.com/user-attachments/assets/37d058d0-b20e-4f09-9f89-6259065c699a" />
