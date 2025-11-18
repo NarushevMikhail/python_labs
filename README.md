@@ -518,6 +518,48 @@ csv_to_json("data/samples/people.csv", "data/out/people_from_csv.json")
 <img width="1773" height="1449" alt="image" src="https://github.com/user-attachments/assets/0805242c-fe86-4c8f-891c-f7ae1ff3ad8b" />
 <img width="1344" height="827" alt="image" src="https://github.com/user-attachments/assets/df5aaabb-6c52-48a6-b775-c07affbaabe0" />
 
+# Лабораторная работа №6
+## `Файл cli_text.py`
+### Код:
+<img width="2075" height="1452" alt="image" src="https://github.com/user-attachments/assets/d2d43b80-9d93-4def-91af-20ec884aeb31" />
+<img width="1874" height="1371" alt="image" src="https://github.com/user-attachments/assets/e13acbd4-c877-4f98-b1c4-faa92cae2253" />
+
+### Вывод сторк с номерами (cat): `python src\lab_06\cli_text.py cat --input data\samples\people.csv -n`
+<img width="1280" height="121" alt="image" src="https://github.com/user-attachments/assets/dd8a52ac-e488-4937-864c-368be574f7d1" />
+
+### Вывод топ слов (stats): `python src\lab_06\cli_text.py stats --input data\samples\people.csv --top 8`
+<img width="2335" height="420" alt="image" src="https://github.com/user-attachments/assets/cce7f4c0-9b2b-4951-b015-0614c0ded404" />
+
+## `Файл cli_convert.py`
+### Код:
+<img width="2360" height="1484" alt="image" src="https://github.com/user-attachments/assets/b9aabb00-c368-44ef-92c8-e914a0eb0f54" />
+<img width="2027" height="1174" alt="image" src="https://github.com/user-attachments/assets/77229187-3b76-487a-97bc-22cf850ea2c4" />
+
+### JSON -> CSV
+
+<img width="1280" height="116" alt="image" src="https://github.com/user-attachments/assets/5e6d6923-2204-4147-8506-875289869b47" />
+<img width="1280" height="518" alt="image" src="https://github.com/user-attachments/assets/c6021fac-987b-4b91-b472-98948aa550fc" />
+<img width="1280" height="481" alt="image" src="https://github.com/user-attachments/assets/bfb97099-1927-472f-8b09-74045c3d4101" />
+
+### CSV -> JSON
+<img width="1280" height="189" alt="image" src="https://github.com/user-attachments/assets/4b259645-31c8-44aa-810f-6e394ce46633" />
+<img width="1280" height="382" alt="image" src="https://github.com/user-attachments/assets/2285c489-fe60-4e0e-b754-db6a0f9cc381" />
+<img width="1280" height="562" alt="image" src="https://github.com/user-attachments/assets/4d4d5e71-bbf7-4220-8ea8-46004db96562" />
+
+### CSV -> XLSX
+<img width="1280" height="90" alt="image" src="https://github.com/user-attachments/assets/da479fb4-dc31-4c19-8fa3-480ac9786bf4" />
+<img width="1181" height="490" alt="image" src="https://github.com/user-attachments/assets/55e34c50-6799-4e27-a397-ff7f4479c3ed" />
+right here upload img with xlsx
+
+### Отработка help
+<img width="1280" height="654" alt="image" src="https://github.com/user-attachments/assets/37d058d0-b20e-4f09-9f89-6259065c699a" />
+
+
+
+
+
+
+
 
 
 
