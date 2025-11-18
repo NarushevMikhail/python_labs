@@ -8,5 +8,10 @@
     "name": "Bob",
     "age": "25",
     "city": "Moscow"
+  },
+  {
+    "name": "Misha",
+    "age": "18",
+    "city": "Samara"
   }
 ]

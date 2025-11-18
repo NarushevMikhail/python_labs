@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r'c:/Users/narus/OneDrive/Рабочий стол/лабароторные работы/Программирование/репозиторий/python_labs/python_labs-1/src/lib/')
+sys.path.append(r'c:/Users/narus/OneDrive/Рабочий стол/лабароторные работы/Программирование/репозиторий/python_labs/python_labs-1/src')
 
 from text import normalize, tokenize, count_freq
 
@@ -8,7 +8,7 @@ def table(arr: list[tuple[str, int]], isTable: bool = True) -> str: #списо�
         return "(нет данных)"
     s = str()
     
-def main(text: str):
+def stats(text: str, i):
     text = text.strip() #лишние пробелы в начале и конце
     tokens = normalize(text)
     tokens = tokenize(tokens)
@@ -22,5 +22,3 @@ def main(text: str):
     print("Топ-5:")
     for i in top_result:
         print(f'{i[0]}: {i[1]}')
-
-main(sys.stdin.buffer.read().decode('utf-8'))
