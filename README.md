@@ -530,6 +530,83 @@ csv_to_json("data/samples/people.csv", "data/out/people_from_csv.json")
 ### Вывод топ слов (stats): `python src\lab_06\cli_text.py stats --input data\samples\people.csv --top 8`
 <img width="2335" height="420" alt="image" src="https://github.com/user-attachments/assets/cce7f4c0-9b2b-4951-b015-0614c0ded404" />
 
+```
+import sys
+sys.path.append(r"C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs-1\src\lab_03")
+from text_stats import stats
+from pathlib import Path
+import argparse
+import os
+
+
+def cat_command(input_file: str, number_lines: bool = False):
+    if not check_file(input_file):
+        sys.exit(1)
+    try:
+        with open(input_file, "r", encoding= 'utf-8') as f:
+            for line_number, line in enumerate(f, start = 1): #нумерация 
+                if number_lines:
+                    print(f"{line_number:6d} {line}", end = '')
+                else:
+                    print(line, end = '')
+    except Exception as e:
+        print(f'Ошибка при чтение файла: {e}', file = sys.stderr)
+        sys.exit(1)
+
+def check_file(file_path: str) -> bool:
+    path = Path(file_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Файл: {path} не найден")
+    if not path.is_file():
+        raise ValueError(f'Файл: {path} не является файлом')
+        
+    return True
+    
+def stats_command(input_file: str, top_n: int = 5):
+    if not check_file(input_file):
+        sys.exit(1)
+
+    if top_n <= 0:
+        print('Ошибка: значение --top должно быть положительным числом', file = sys.stderr) #куда выводить ошибку, use for mistakes
+        sys.exit(1)
+
+    try:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            text = f.read()
+            stats(text, top_n)
+
+    except Exception as e: #перехватывает другие ошибки, которые могли возникнуть во время работы D
+        print(f'Ошибка при чтение файла: {e}', file = sys.stderr)
+        sys.exit(1)
+
+def main():
+    parser = argparse.ArgumentParser(description="CLI‑утилиты лабораторной №6")
+    subparsers = parser.add_subparsers(dest="command")
+
+    # подкоманда cat
+    cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
+    cat_parser.add_argument("--input", required=True)
+    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
+
+    # подкоманда stats
+    stats_parser = subparsers.add_parser("stats", help="Частоты слов")
+    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--top", type=int, default=5)
+
+    args = parser.parse_args()
+
+    if args.command == "cat": #если пользователь ввел в командной строке cat
+        cat_command(args.input, args.n)
+
+    elif args.command == "stats": #если пользователь ввел в командной строке stats
+        stats_command(args.input, args.top)
+
+
+if __name__== '__main__':
+    main()
+
+```
+
 ## `Файл cli_convert.py`
 ### Код:
 <img width="2360" height="1484" alt="image" src="https://github.com/user-attachments/assets/b9aabb00-c368-44ef-92c8-e914a0eb0f54" />
@@ -549,10 +626,78 @@ csv_to_json("data/samples/people.csv", "data/out/people_from_csv.json")
 ### CSV -> XLSX
 <img width="1280" height="90" alt="image" src="https://github.com/user-attachments/assets/da479fb4-dc31-4c19-8fa3-480ac9786bf4" />
 <img width="1181" height="490" alt="image" src="https://github.com/user-attachments/assets/55e34c50-6799-4e27-a397-ff7f4479c3ed" />
-right here upload img with xlsx
+<img width="2042" height="633" alt="image" src="https://github.com/user-attachments/assets/e4d71534-2e32-4359-9650-96c9793da39d" />
+
 
 ### Отработка help
 <img width="1280" height="654" alt="image" src="https://github.com/user-attachments/assets/37d058d0-b20e-4f09-9f89-6259065c699a" />
+
+```
+import sys, argparse
+sys.path.append(r'C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs-1\src\lab_06')
+sys.path.append(r'C:\Users\narus\OneDrive\Рабочий стол\лабароторные работы\Программирование\репозиторий\python_labs-1\src\lib')
+from csv_xlsx import csv_to_xlsx
+from json_csv import json_to_csv, csv_to_json
+from cli_text import check_file
+
+def main():
+    parser = argparse.ArgumentParser(description="Конвертеры данных")
+    sub = parser.add_subparsers(dest="cmd", required=True) #пользователь должен указать одну команду, без неё скрипт выдаст ошибку, создание команд
+
+    p1 = sub.add_parser("json2csv")
+    p1.add_argument("--in", dest="input", required=True, help='Входной JSON файл') #добавляем аргументы
+    p1.add_argument("--out", dest="output", required=True, help='Выходной CSV файл') #добавляем аргументы
+
+    p2 = sub.add_parser("csv2json")
+    p2.add_argument("--in", dest="input", required=True, help='Входной CSV файл')
+    p2.add_argument("--out", dest="output", required=True, help='Выходной JSON файл')
+
+    p3 = sub.add_parser("csv2xlsx")
+    p3.add_argument("--in", dest="input", required=True, help='Входной CSV файл')
+    p3.add_argument("--out", dest="output", required=True, help='Выходной XLSX файл')
+
+    args = parser.parse_args() #разбирает аргументы командной строки
+
+    try:
+        if args.cmd == 'json2csv': #проверка команды
+            if not check_file(args.input):
+                print(f'Ошибка: файл {args.input} не существует или недосутпен')
+                return 1
+
+            json_to_csv(args.input, args.output)
+            print(f'Усешно: JSON --> CSV')
+
+        elif args.cmd == 'csv2json':
+            if not check_file(args.input):
+                print(f'Ошибка: файл {args.input} не существует или недоступен')
+                return 1
+
+            csv_to_json(args.input, args.output)
+            print(f'Успешно: CSV --> JSON')
+
+        elif args.cmd == 'csv2xlsx':
+            if not check_file(args.input):
+                print(f'Ошибка: файл {args.input} не найжен или недоступен')
+                return 1
+
+            csv_to_xlsx(args.input, args.output)
+            print(f'Успешгно: CSV --> XLSX')
+
+        else:
+            print(f'Ошибка: неизвестная команда')
+            return 1
+        
+        return 0
+
+
+    except Exception as e:
+        print(f'Ошибка при конвертации: {str(e)}')
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    sys.exit(main())
+```
 
 
 
