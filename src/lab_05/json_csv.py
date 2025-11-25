@@ -59,7 +59,6 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 
 
 def csv_to_json(csv_path: str, json_path: str) -> None:
-
     csv_file = Path(csv_path)
     json_file = Path(json_path)
 
@@ -67,29 +66,29 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
         raise FileNotFoundError(f"Файл {csv_path} не найден")
 
     if csv_file.suffix.lower() != ".csv":
-        raise ValueError("Неверный тип файла. Ожидается .csv")
+        raise ValueError("Неверный тип файла")
 
-    try:
-        with csv_file.open("r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)  # создание читателя который возвращает словари
-            if reader.fieldnames is None:  ## список заголовков CSV файла
-                raise ValueError("CSV файл не содержит заголовка")
+    with csv_file.open("r", encoding="utf-8") as f:
+        lines = f.read().splitlines()
 
-            data = list(reader)  # преобразование всех строк в список словарей
-
-    except Exception as e:
-        raise ValueError(f"Ошибка чтения CSV: {e}")
-
-    if not data:
+    if not lines:
         raise ValueError("Пустой CSV файл")
 
-    try:
-        with json_file.open("w", encoding="utf-8") as f:
-            json.dump(
-                data, f, ensure_ascii=False, indent=2
-            )  # запись данных в JSON файл, форматирование с отступами в 2 пробела, разрешение Unicode символов
-    except Exception as e:
-        raise ValueError(f"Ошибка записи JSON: {e}")
+    header = lines[0].split(",")
+    if any(not h.strip() for h in header):
+        raise ValueError("Пустой заголовок CSV")
+
+    data = []
+    for row in lines[1:]:
+        cols = row.split(",")
+
+        if len(cols) != len(header):
+            raise ValueError("Количество колонок не совпадает с заголовком")
+
+        data.append(dict(zip(header, cols)))
+
+    with json_file.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 json_to_csv("data/samples/people.json", "data/out/people_from_json.csv")

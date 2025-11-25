@@ -13,22 +13,22 @@ from src.lab_05.json_csv import json_to_csv, csv_to_json
             1,
         ),
         (
-            "different_order",
+            "different_order", #разный порядок
             [{"name": "Alice", "age": 25}, {"age": 30, "name": "Bob"}],
             2,
         ),
-        ("empty_values", [{"name": "Alice", "age": 25, "comment": ""}], 1),
+        ("empty_values", [{"name": "Alice", "age": 25, "comment": ""}], 1), #путсые значения
         ("unicode", [{"name": "Алиса", "message": "Привет!"}], 1),
     ],
 )
 def test_json_to_csv_succes(tmp_path, test_name, data, expected_count):
-    src = tmp_path / f"{test_name}.json"
+    src = tmp_path / f"{test_name}.json" #создание временных файлов, src и dst - пути к исходному файлу
     dst = tmp_path / f"{test_name}.csv"
 
-    src.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    src.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8") #создание json файла
     json_to_csv(str(src), str(dst))
 
-    assert dst.exists()
+    assert dst.exists() #проверка что CSV файл уже создан
     with dst.open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
@@ -41,7 +41,7 @@ def test_json_to_csv_succes(tmp_path, test_name, data, expected_count):
     [
         ("basic", "name,age\nAlice,25\nBob,30", 2),
         ("special_chars", 'name,description\n"Alice","Test", comma"', 1),
-        ("semicolon_delim", "name;age\nAlice;25\nBob;30", 2),
+        ("semicolon_delim", "name;age\n'Alice';25\n'Bob';30", 2),
     ],
 )
 def test_csv_to_json_succes(tmp_path, test_name, csv_content, expected_count):
