@@ -1,5 +1,6 @@
 # Лабораторная работа №8
 ## Задание A `models.py`
+### Здесь мы создаем класс для хранения и обработки информации о студенте
 <img width="2106" height="1433" alt="image" src="https://github.com/user-attachments/assets/17a9618f-14ca-41c8-8338-82208307ef8b" />
 <img width="1546" height="685" alt="image" src="https://github.com/user-attachments/assets/40246fd7-a962-4004-afe6-1bada4328c3e" />
 
@@ -62,6 +63,7 @@ class Student:
 ```
 
 ## Задание B `serialize.py`
+### здесь мы слздаем функции для записи студентов в файл Json, и считывания их с другого файла Json
 <img width="1142" height="981" alt="image" src="https://github.com/user-attachments/assets/6b8ea08d-6732-40f5-bdd3-bef5ad7e9f63" />
 
 ```
@@ -92,6 +94,7 @@ def students_from_json(path):
 ```
 
 ## Файл `main`
+### Отрабока всех созданных функций
 <img width="1267" height="648" alt="image" src="https://github.com/user-attachments/assets/dbf1ac96-4f68-4221-88cc-e0ee9e082f0f" />
 
 ```
@@ -121,3 +124,4 @@ if __name__ == "__main__":
 <img width="737" height="781" alt="image" src="https://github.com/user-attachments/assets/1f51b1f6-6364-4ef6-b4f0-d4d96d6b464b" />
 
 <img width="1019" height="134" alt="image" src="https://github.com/user-attachments/assets/afa16bd3-5936-453e-acda-5099ae3b3d6d" />
+
