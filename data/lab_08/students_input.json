@@ -1,0 +1,20 @@
+[
+  {
+    "fio": "Lewis Carl Davidson Hamilton",
+    "birthdate": "1999/10/01",
+    "group": "Ferrari",
+    "gpa": 1.5
+  },
+  {
+    "fio": "Lebron James Coby",
+    "birthdate": "1987/09/12",
+    "group": "Lakers",
+    "gpa": 4.5
+  },
+  {
+    "fio": "MIchael Jackson",
+    "birthdate": "2020/10/02",
+    "group": "Songer",
+    "gpa": 2.8
+  }
+]

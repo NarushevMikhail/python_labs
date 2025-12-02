@@ -142,7 +142,7 @@ def test_json_csv_roundtrip(tmp_path):
     assert final_data[0]["name"] == "Alice"
 
 
-def test_unexpected_errors(monkeypatch, tmp_path):
+def test_unexpected_errors(monkeypatch, tmp_path): #
     """Тест неожиданных ошибок"""
     # Тест для JSON
     src_json = tmp_path / "test.json"
